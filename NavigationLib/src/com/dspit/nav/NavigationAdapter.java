@@ -10,14 +10,20 @@ import java.util.ArrayList;
  * single main function (i.e. {@link #addContent(Node)}, {@link #nav(Node)} and 
  * {@link #removeContent(Node)}) to get desired effects and stuff.
  * 
+ * This navigation scheme is one where the graphics part of the program must 
+ * rely on the navigation system to know what to display. This implementation
+ * of {@link Navigatable} provides a prebuilt basic navigation system for any
+ * graphical navigation design.
+ * 
  * @author David Boivin (Spit)
  */
-abstract public class NavigationAdapter implements Navigatable {
+public class NavigationAdapter implements Navigatable {
 	
 // Members ----------------------------------------------------------------- //
 	
 	private Node mHome;
 	private ArrayList<Node> mContent;
+	private Node mCurrent;
 	
 // Constructors ------------------------------------------------------------ //
 	
@@ -33,6 +39,7 @@ abstract public class NavigationAdapter implements Navigatable {
 		
 		mHome = home;
 		mContent = (content != null)? content : new ArrayList<Node>();
+		mCurrent = mHome;
 	}
 	
 	/**
@@ -68,6 +75,11 @@ abstract public class NavigationAdapter implements Navigatable {
 		return mContent;
 	}
 
+	@Override
+	public Node getCurrentNode() {
+		return mCurrent;
+	}
+	
 	/**
 	 * @see #getCurrentNode()
 	 */
@@ -165,6 +177,20 @@ abstract public class NavigationAdapter implements Navigatable {
 		this.removeContent(mContent.get(index));
 	}
 	
+	@Override
+	public boolean nav(Node node) {
+		
+		if(!mContent.contains(node)){
+			return false;
+		}
+		
+		//makes sure that the node within the system is set to the currentNode
+		//value.
+		mCurrent = mContent.get(mContent.indexOf(node));
+		
+		return false;
+	}
+	
 	/**
 	 * @see #nav(Node)
 	 */
@@ -247,5 +273,4 @@ abstract public class NavigationAdapter implements Navigatable {
 		return false;
 		
 	}
-
 }
