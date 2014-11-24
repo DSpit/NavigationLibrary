@@ -4,6 +4,14 @@ package com.dspit.nav;
 
 import java.util.ArrayList;
 
+/**
+ * This class provides a basic implementation of the the {@link Navigatable}
+ *  interface. This implementation tries to focus on being able to override a 
+ * single main function (i.e. {@link #addContent(Node)}, {@link #nav(Node)} and 
+ * {@link #removeContent(Node)}) to get desired effects and stuff.
+ * 
+ * @author David Boivin (Spit)
+ */
 abstract public class NavigationAdapter implements Navigatable {
 	
 // Members ----------------------------------------------------------------- //
