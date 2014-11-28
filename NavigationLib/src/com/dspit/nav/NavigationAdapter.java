@@ -7,8 +7,8 @@ import java.util.ArrayList;
 /**
  * This class provides a basic implementation of the the {@link Navigatable}
  *  interface. This implementation tries to focus on being able to override a 
- * single main function (i.e. {@link #addContent(Node)}, {@link #nav(Node)} and 
- * {@link #removeContent(Node)}) to get desired effects and stuff.
+ * single main function (i.e. {@link #addContent(NavNode)}, {@link #nav(NavNode)} and 
+ * {@link #removeContent(NavNode)}) to get desired effects and stuff.
  * 
  * This navigation scheme is one where the graphics part of the program must 
  * rely on the navigation system to know what to display. This implementation
@@ -21,9 +21,9 @@ public class NavigationAdapter implements Navigatable {
 	
 // Members ----------------------------------------------------------------- //
 	
-	private Node mHome;
-	private ArrayList<Node> mContent;
-	private Node mCurrent;
+	private NavNode mHome;
+	private ArrayList<NavNode> mContent;
+	private NavNode mCurrent;
 	
 // Constructors ------------------------------------------------------------ //
 	
@@ -32,13 +32,13 @@ public class NavigationAdapter implements Navigatable {
 	 * is null, then the contentArray member will be initialized with a new 
 	 * array.
 	 * 
-	 * @param home The Home Navigation Node.
+	 * @param home The Home Navigation NavNode.
 	 * @param content The other content Nodes
 	 */
-	public NavigationAdapter(Node home, ArrayList<Node> content){
+	public NavigationAdapter(NavNode home, ArrayList<NavNode> content){
 		
 		mHome = home;
-		mContent = (content != null)? content : new ArrayList<Node>();
+		mContent = (content != null)? content : new ArrayList<NavNode>();
 		mCurrent = mHome;
 	}
 	
@@ -48,35 +48,35 @@ public class NavigationAdapter implements Navigatable {
 	 * 
 	 * @param home The home navigation node.
 	 */
-	public NavigationAdapter(Node home){
+	public NavigationAdapter(NavNode home){
 		this(home, null);
 	}
 	
 // Overrides --------------------------------------------------------------- //
 
 	@Override
-	public Node getHome() {
+	public NavNode getHome() {
 		return mHome;
 	}
 
 	@Override
-	public Node getContent(int index) throws IndexOutOfBoundsException {
+	public NavNode getContent(int index) throws IndexOutOfBoundsException {
 		
 		if(!this.isIndexInRange(index)){
 			throw new IndexOutOfBoundsException("The index used to search for "
-							+"a Navigation Node is out of Bounds.");
+							+"a Navigation NavNode is out of Bounds.");
 		}
 		
 		return mContent.get(index);
 	}
 
 	@Override
-	public ArrayList<Node> getContent() {
+	public ArrayList<NavNode> getContent() {
 		return mContent;
 	}
 
 	@Override
-	public Node getCurrentNode() {
+	public NavNode getCurrentNode() {
 		return mCurrent;
 	}
 	
@@ -89,7 +89,7 @@ public class NavigationAdapter implements Navigatable {
 	}
 
 	@Override
-	public void setHome(Node home) {
+	public void setHome(NavNode home) {
 		mHome = home;
 	}
 
@@ -98,7 +98,7 @@ public class NavigationAdapter implements Navigatable {
 	 * the the array by default. 
 	 */
 	@Override
-	public void addContent(int index, Node content) {
+	public void addContent(int index, NavNode content) {
 		
 		//handles index numbers which are too small
 		if(0 > index){
@@ -118,28 +118,28 @@ public class NavigationAdapter implements Navigatable {
 	}
 
 	/**
-	 * @see #addContent(int, Node)
+	 * @see #addContent(int, NavNode)
 	 */
 	@Override
-	public void addContent(Node content) {
+	public void addContent(NavNode content) {
 		this.addContent(-1, content);
 	}
 
 	/**
-	 * @see #addContent(int,Node)
+	 * @see #addContent(int,NavNode)
 	 */
 	@Override
-	public void addContent(ArrayList<Node> content) {
+	public void addContent(ArrayList<NavNode> content) {
 		mContent.addAll(content);
 	}
 	
 	/**
-	 * @see #removeContent(Node)
+	 * @see #removeContent(NavNode)
 	 */
 	@Override
 	public void removeAllContent() {
 		
-		for(Node content : mContent){
+		for(NavNode content : mContent){
 			this.removeContent(content);
 		}
 	}
@@ -152,7 +152,7 @@ public class NavigationAdapter implements Navigatable {
 	 * @see #navHome()
 	 */
 	@Override
-	public boolean removeContent(Node content) {
+	public boolean removeContent(NavNode content) {
 		
 		//makes sure this node isn't being displayed as it's being removed.
 		if(this.getCurrentNode() == content){
@@ -164,21 +164,21 @@ public class NavigationAdapter implements Navigatable {
 	}
 
 	/**
-	 * @see #removeContent(Node))
+	 * @see #removeContent(NavNode))
 	 */
 	@Override
 	public void removeContent(int index) throws IndexOutOfBoundsException{
 		
 		if(!this.isIndexInRange(index)){
 			throw new IndexOutOfBoundsException("The index to "
-					+ "remove a Navigation Node from the Root out of bounds.");
+					+ "remove a Navigation NavNode from the Root out of bounds.");
 		}
 		
 		this.removeContent(mContent.get(index));
 	}
 	
 	@Override
-	public boolean nav(Node node) {
+	public boolean nav(NavNode node) {
 		
 		if(!mContent.contains(node)){
 			return false;
@@ -192,7 +192,7 @@ public class NavigationAdapter implements Navigatable {
 	}
 	
 	/**
-	 * @see #nav(Node)
+	 * @see #nav(NavNode)
 	 */
 	@Override
 	public void nav(int index) throws IndexOutOfBoundsException {
@@ -206,7 +206,7 @@ public class NavigationAdapter implements Navigatable {
 	}
 
 	/**
-	 * @see #nav(Node)
+	 * @see #nav(NavNode)
 	 */
 	@Override
 	public void navHome() {

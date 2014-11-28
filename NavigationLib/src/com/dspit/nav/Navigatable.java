@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
  * This is an interface which suggests methods that are needed to navigate in
  * a multi page program. This interface provides a basic set of very useful 
  * methods for implementing different navigation schemes. <br>
- * <b>Note: </b>This interface uses the {@link Node} interface to define a 
+ * <b>Note: </b>This interface uses the {@link NavNode} interface to define a 
  * navigation node, or in other words, a specific page which can be navigated 
  * through within the implementing class of Navigatable.
  * 
@@ -24,9 +24,9 @@ public interface Navigatable {
 	 * Method which returns the home page, which is another way of saying
 	 * either the menu or the starting page.
 	 * 
-	 * @return a Navigation Node which is defined to be the home page.
+	 * @return a Navigation NavNode which is defined to be the home page.
 	 */
-	public Node getHome();
+	public NavNode getHome();
 	
 	/**
 	 * Method which returns a specific sub navigation node based on the index
@@ -35,34 +35,34 @@ public interface Navigatable {
 	 * @param index The index of a specific node to return based on the array
 	 * returned by the {@link #getContent()} method.
 	 * 
-	 * @return The Navigation Node which is at the given index.
+	 * @return The Navigation NavNode which is at the given index.
 	 * 
 	 * @throws IndexOutOfBoundsException if the index is either less than 0 or
 	 * 			if the index is greater than {@link #getContent()}.size.
 	 */
-	public Node getContent(int index) throws IndexOutOfBoundsException;
+	public NavNode getContent(int index) throws IndexOutOfBoundsException;
 	
 	/**
 	 * Returns an array of all the sub navigation nodes stored within this
-	 * Navigatable instance. This method should not include the Home Node, 
+	 * Navigatable instance. This method should not include the Home NavNode, 
 	 * which can (and should) be accessed using the {@link #getHome()} method.
 	 * 
 	 * @return An array of Navigation Nodes which are stored in this navigation
 	 * root.
 	 */
-	public ArrayList<Node> getContent();
+	public ArrayList<NavNode> getContent();
 	
 	/**
-	 * Returns the Node which is currently being displayed to the user.
+	 * Returns the NavNode which is currently being displayed to the user.
 	 * 
 	 * @return The current node being displayed to the user.
 	 */
-	public Node getCurrentNode();
+	public NavNode getCurrentNode();
 	
 	/**
 	 * Returns the index of the node which is currently being displayed.
 	 * This method provides a less resource demanding way of checking which
-	 * node is being displayed without using the actual Node to 
+	 * node is being displayed without using the actual NavNode to 
 	 * verify.
 	 * 
 	 * @return The index of the current node based on it's location in the 
@@ -76,13 +76,13 @@ public interface Navigatable {
 	 * This method sets what the root navigation scheme considered the home
 	 * or main page.
 	 * 
-	 * @param home The Navigation Node which will be considered the home page
+	 * @param home The Navigation NavNode which will be considered the home page
 	 * of this Navigation Root.
 	 */
-	public void setHome(Node home);
+	public void setHome(NavNode home);
 	
 	/**
-	 * Method which adds a Navigation Node to the array of navigation nodes 
+	 * Method which adds a Navigation NavNode to the array of navigation nodes 
 	 * stored within this instance. This new node will be added at the given 
 	 * index. <br><br>
 	 * If the index if greater than the size of the content array then
@@ -92,20 +92,20 @@ public interface Navigatable {
 	 * <b>NOTE: </b>It will be up to the implementing class to figure out how 
 	 * to handle shifting the other nodes in the array.
 	 * 
-	 * @param index The index at which to insert the new Node.
+	 * @param index The index at which to insert the new NavNode.
 	 * @param content The new navigation node to be added.
 	 */
-	public void addContent(int index, Node content);
+	public void addContent(int index, NavNode content);
 	
 	/**
-	 * Method which is similar to {@link #addContent(int, Node)} but 
+	 * Method which is similar to {@link #addContent(int, NavNode)} but 
 	 * adds the given node to the end of the content array, without having
 	 * to specify it.
 	 * 
-	 * @param content The new Navigation Node to add to this instance of the
+	 * @param content The new Navigation NavNode to add to this instance of the
 	 * Navigation Root.
 	 */
-	public void addContent(Node content);
+	public void addContent(NavNode content);
 	
 	/**
 	 * Method which adds an array of Navigation Nodes to the end of the 
@@ -114,7 +114,7 @@ public interface Navigatable {
 	 * @param content An Array of new navigation nodes to add to this 
 	 * Navigation root.
 	 */
-	public void addContent(ArrayList<Node> content);
+	public void addContent(ArrayList<NavNode> content);
 	
 // Removers ---------------------------------------------------------------- //
 	
@@ -124,18 +124,18 @@ public interface Navigatable {
 	public void removeAllContent();
 	
 	/**
-	 * Removes the specific Node which is given. If the given node is not found
+	 * Removes the specific NavNode which is given. If the given node is not found
 	 * within the content array, then this method doesn't do anything.
 	 * 
-	 * @param content The Node to remove.
+	 * @param content The NavNode to remove.
 	 * 
 	 * @return <b>true</b> if the node is found and removed,
 	 * <b>false</b> if the node is not found.
 	 */
-	public boolean removeContent(Node content);
+	public boolean removeContent(NavNode content);
 	
 	/**
-	 * Removes the specified Node which is at the given index within the 
+	 * Removes the specified NavNode which is at the given index within the 
 	 * content array.
 	 * 
 	 * @param index the index of the node to remove.
@@ -158,7 +158,7 @@ public interface Navigatable {
 	 * @return <b>true</b> if the change was successful and <b>false</b> 
 	 * if the node given was not found within the content array.
 	 */
-	public boolean nav(Node node);
+	public boolean nav(NavNode node);
 	
 	/**
 	 * Method which changes the currently displayed node to the node within the
@@ -184,7 +184,7 @@ public interface Navigatable {
 	public void navNext();
 	
 	/**
-	 * Method which displays the previous Navigation Node in the content array.
+	 * Method which displays the previous Navigation NavNode in the content array.
 	 */
 	public void navPrev();
 	
@@ -207,7 +207,7 @@ public interface Navigatable {
 	// Getters ------------------------------------------------------------- //
 		
 		/**
-		 * Method which returns the title of this Node.
+		 * Method which returns the title of this NavNode.
 		 * 
 		 * @return The title of this node.
 		 */
@@ -215,7 +215,7 @@ public interface Navigatable {
 		
 		/**
 		 * This method returns the icon which represents this node graphically,
-		 * which is a more user friendly way of identifying a specific Node.
+		 * which is a more user friendly way of identifying a specific NavNode.
 		 * 
 		 * @return The image which represents this node graphically.
 		 */
