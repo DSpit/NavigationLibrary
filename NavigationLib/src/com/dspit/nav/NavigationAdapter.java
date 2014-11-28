@@ -10,20 +10,19 @@ import java.util.ArrayList;
  * single main function (i.e. {@link #addContent(NavNode)}, {@link #nav(NavNode)} and 
  * {@link #removeContent(NavNode)}) to get desired effects and stuff.
  * 
- * This navigation scheme is one where the graphics part of the program must 
- * rely on the navigation system to know what to display. This implementation
- * of {@link Navigatable} provides a prebuilt basic navigation system for any
- * graphical navigation design.
+ * This Navigatable implementation if used to easily extend any graphic class,
+ * so that the navigation system is integrated with the main graphic class, 
+ * rather than having the 2 things separate (not so good for the day when you 
+ * want to revamp the navigation but whatever).
  * 
  * @author David Boivin (Spit)
  */
-public class NavigationAdapter implements Navigatable {
+abstract public class NavigationAdapter implements Navigatable {
 	
 // Members ----------------------------------------------------------------- //
 	
 	private NavNode mHome;
 	private ArrayList<NavNode> mContent;
-	private NavNode mCurrent;
 	
 // Constructors ------------------------------------------------------------ //
 	
@@ -39,7 +38,6 @@ public class NavigationAdapter implements Navigatable {
 		
 		mHome = home;
 		mContent = (content != null)? content : new ArrayList<NavNode>();
-		mCurrent = mHome;
 	}
 	
 	/**
@@ -73,11 +71,6 @@ public class NavigationAdapter implements Navigatable {
 	@Override
 	public ArrayList<NavNode> getContent() {
 		return mContent;
-	}
-
-	@Override
-	public NavNode getCurrentNode() {
-		return mCurrent;
 	}
 	
 	/**
@@ -175,20 +168,6 @@ public class NavigationAdapter implements Navigatable {
 		}
 		
 		this.removeContent(mContent.get(index));
-	}
-	
-	@Override
-	public boolean nav(NavNode node) {
-		
-		if(!mContent.contains(node)){
-			return false;
-		}
-		
-		//makes sure that the node within the system is set to the currentNode
-		//value.
-		mCurrent = mContent.get(mContent.indexOf(node));
-		
-		return false;
 	}
 	
 	/**
