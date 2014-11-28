@@ -202,7 +202,7 @@ public interface Navigatable {
 	 * 
 	 * @author David Boivin (Spit)
 	 */
-	public interface Node {
+	public interface NavNode {
 		
 	// Getters ------------------------------------------------------------- //
 		
