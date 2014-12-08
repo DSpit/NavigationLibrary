@@ -3,6 +3,7 @@
 package com.dspit.nav;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * This class provides a basic implementation of the the {@link Navigatable}
@@ -17,7 +18,8 @@ import java.util.ArrayList;
  * 
  * @author David Boivin (Spit)
  */
-abstract public class NavigationAdapter implements Navigatable {
+abstract public class NavigationAdapter extends Observable 
+												implements Navigatable {
 	
 // Members ----------------------------------------------------------------- //
 	
@@ -182,6 +184,10 @@ abstract public class NavigationAdapter implements Navigatable {
 		}
 		
 		this.nav(mContent.get(index));
+		
+		//notify listeners of a change
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	/**

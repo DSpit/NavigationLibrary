@@ -4,6 +4,9 @@ package com.dspit.nav;
 
 import java.util.ArrayList;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+
 /**
  * This class provides a basic implementation of the the {@link Navigatable}
  *  interface. This implementation tries to focus on being able to override a 
@@ -17,7 +20,7 @@ import java.util.ArrayList;
  * 
  * @author David Boivin (Spit)
  */
-public class Navigation extends NavigationAdapter {
+public class Navigation extends NavigationAdapter{
 	
 // Members ----------------------------------------------------------------- //
 	
