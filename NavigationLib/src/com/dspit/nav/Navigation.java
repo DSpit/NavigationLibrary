@@ -4,9 +4,6 @@ package com.dspit.nav;
 
 import java.util.ArrayList;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-
 /**
  * This class provides a basic implementation of the the {@link Navigatable}
  *  interface. This implementation tries to focus on being able to override a 
@@ -24,8 +21,6 @@ public class Navigation extends NavigationAdapter{
 	
 // Members ----------------------------------------------------------------- //
 	
-	private NavNode mHome;
-	private ArrayList<NavNode> mContent;
 	private NavNode mCurrent;
 	
 // Constructors ------------------------------------------------------------ //
@@ -40,8 +35,6 @@ public class Navigation extends NavigationAdapter{
 	 */
 	public Navigation(NavNode home, ArrayList<NavNode> content){
 		super(home,content);
-		
-		mCurrent = home;
 	}
 	
 	/**
@@ -54,7 +47,7 @@ public class Navigation extends NavigationAdapter{
 		this(home, null);
 	}
 
-// IMplementations --------------------------------------------------------- //
+// Implementations --------------------------------------------------------- //
 
 	@Override
 	public NavNode getCurrentNode() {
@@ -64,13 +57,13 @@ public class Navigation extends NavigationAdapter{
 	@Override
 	public boolean nav(NavNode node) {
 		
-		if(!mContent.contains(node)){
+		if(!this.getContent().contains(node)){
 			return false;
 		}
 		
 		//makes sure that the node within the system is set to the currentNode
 		//value.
-		mCurrent = mContent.get(mContent.indexOf(node));
+		mCurrent = this.getContent().get(this.getContent().indexOf(node));
 		
 		return false;
 	}
