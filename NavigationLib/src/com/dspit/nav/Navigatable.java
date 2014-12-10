@@ -4,8 +4,6 @@ package com.dspit.nav;
 
 import java.util.ArrayList;
 
-import javafx.scene.image.Image;
-
 /**
  * This is an interface which suggests methods that are needed to navigate in
  * a multi page program. This interface provides a basic set of very useful 
@@ -217,9 +215,9 @@ public interface Navigatable {
 		 * This method returns the icon which represents this node graphically,
 		 * which is a more user friendly way of identifying a specific NavNode.
 		 * 
-		 * @return The image which represents this node graphically.
+		 * @return The image URI which represents this node graphically.
 		 */
-		public Image getIcon();
+		public String getIcon();
 		
 	// Setters ------------------------------------------------------------- //
 		
@@ -240,9 +238,9 @@ public interface Navigatable {
 		 * about without even having to read the title. This icon should be 
 		 * minimalistic and simplistic while still conveying its message.
 		 * 
-		 * @param iconImage The image to display as the icon of this node.
+		 * @param iconImage The String path of the image to display.
 		 */
-		public void setIcon(Image iconImage);
+		public void setIcon(String iconImage);
 
 	}
 }
