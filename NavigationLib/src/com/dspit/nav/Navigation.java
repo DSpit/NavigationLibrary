@@ -59,13 +59,17 @@ public class Navigation extends NavigationAdapter{
 	@Override
 	public boolean nav(NavNode node) {
 		
-		if(!this.getContent().contains(node) && !this.getHome().equals(node)){
-			return false;
+		if(this.getContent().contains(node) ){
+			//makes sure that the node within the system is set to the currentNode
+			//value.
+			mCurrent = this.getContent().get(this.getContent().indexOf(node));
+			return true;
+			
+		}else if(this.getHome().equals(node)){
+			mCurrent = this.getHome();
+			return true;
 		}
 		
-		//makes sure that the node within the system is set to the currentNode
-		//value.
-		mCurrent = this.getContent().get(this.getContent().indexOf(node));
 		
 		return false;
 	}
