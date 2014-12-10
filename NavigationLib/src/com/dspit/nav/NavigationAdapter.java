@@ -180,6 +180,7 @@ abstract public class NavigationAdapter extends Observable
 	 */
 	@Override
 	public boolean nav(NavNode node){
+		setChanged();
 		notifyObservers();
 		return true;
 	}
