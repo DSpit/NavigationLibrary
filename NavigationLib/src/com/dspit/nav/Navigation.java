@@ -35,6 +35,8 @@ public class Navigation extends NavigationAdapter{
 	 */
 	public Navigation(NavNode home, ArrayList<NavNode> content){
 		super(home,content);
+		
+		this.nav(home);
 	}
 	
 	/**
@@ -57,7 +59,7 @@ public class Navigation extends NavigationAdapter{
 	@Override
 	public boolean nav(NavNode node) {
 		
-		if(!this.getContent().contains(node)){
+		if(!this.getContent().contains(node) && !this.getHome().equals(node)){
 			return false;
 		}
 		
