@@ -63,10 +63,12 @@ public class Navigation extends NavigationAdapter{
 			//makes sure that the node within the system is set to the currentNode
 			//value.
 			mCurrent = this.getContent().get(this.getContent().indexOf(node));
+			super.nav(node);
 			return true;
 			
 		}else if(this.getHome().equals(node)){
 			mCurrent = this.getHome();
+			super.nav(node);
 			return true;
 		}
 		

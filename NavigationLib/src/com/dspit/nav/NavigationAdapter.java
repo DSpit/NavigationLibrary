@@ -172,6 +172,18 @@ abstract public class NavigationAdapter extends Observable
 		this.removeContent(mContent.get(index));
 	}
 	
+	
+	/**
+	 * Basic implementation of the nav method, which basically notifies 
+	 * Observers and does nothing else.
+	 * @return 
+	 */
+	@Override
+	public boolean nav(NavNode node){
+		notifyObservers();
+		return true;
+	}
+	
 	/**
 	 * @see #nav(NavNode)
 	 */
